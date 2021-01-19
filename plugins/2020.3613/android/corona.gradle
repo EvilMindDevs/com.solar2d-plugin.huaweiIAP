@@ -1,0 +1,9 @@
+repositories {
+    maven {
+        url "https://developer.huawei.com/repo/"
+    }
+}
+
+dependencies {
+    implementation 'com.huawei.hms:iap:4.0.4.301'
+}

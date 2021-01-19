@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    implementation ':Corona@aar'
+    implementation 'com.huawei.hms:iap:4.0.4.301'
+}
+
+task extractPluginFromAAR(type: Copy) {
+    group "Corona"
+    dependsOn "assembleRelease"
+    from {
+        zipTree("build/outputs/aar/${project.name}-release.aar").matching { include '**/classes.jar' }.singleFile
+    }
+    into('build/outputs')
+    rename ('classes.jar', 'plugin.huaweiIAP.jar')
+}
